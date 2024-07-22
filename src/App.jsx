@@ -22,7 +22,9 @@ function App() {
       try {
         setIsLoading(true);
         const res = await fetch(`${BASE_URL}/cities`);
-        const data = await res.json();
+        const data1 = await res.json();
+
+        const data = data1.map((city) => ({ ...city, id: Number(city.id) }));
         setCities(data);
         console.log(data);
       } catch (err) {
@@ -44,6 +46,8 @@ function App() {
 
         <Route path="pricing" element={<Pricing />} />
 
+        <Route path="login" element={<Login />} />
+
         <Route path="app" element={<AppLayout />}>
           <Route
             index
@@ -60,8 +64,6 @@ function App() {
           />
           <Route path="form" element={<p>Form</p>} />
         </Route>
-
-        <Route path="login" element={<Login />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>
